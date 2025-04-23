@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using BusinessLayer.Repositories;
 using DataAccessLayer.Entities;
 using ApplicationLayer.Interfaces;
-using Newtonsoft;
 using ApplicationLayer.DTOs;
 using System.Xml;
 
@@ -20,14 +19,24 @@ namespace WebAPI.Controllers
             _repo = repoBooks;
         }
 
+        /// <summary>
+        /// Obtener los datos de todos los libros de una pagina especifica
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns>Lista de <see cref="Books"/></returns>
         [HttpGet]
-        public async Task<ActionResult<(string, IEnumerable<Books>)>> GetAll(int page = 1) // se muestran 3 libros por pagina
+        public async Task<ActionResult<(string, IEnumerable<Books>)>> GetAll(int page = 1, int quantityBooks = 3)
         {
 
-            var bookList = await _repo.GetAllAsync(page);
+            var bookList = await _repo.GetAllAsync(page, quantityBooks);
             return Ok(bookList.Page == -1 ? "NO se ha agregado ningún libro aún." : bookList);
         }
 
+        /// <summary>
+        /// Obtener los datos de un libro especifico a partir de su identificador
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="Books"/> si existe, de lo contrario <see cref="NotFoundResult"/></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Books>> GetById(int id)
         {
@@ -39,6 +48,11 @@ namespace WebAPI.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Crear un libro nuevo
+        /// </summary>
+        /// <param name="bookDto"></param>
+        /// <returns>Url location si fue creado, de lo contrario <see cref="BadRequestResult"/> con el error</returns>
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] WithoutIdBookRequest bookDto)
         {
@@ -57,6 +71,11 @@ namespace WebAPI.Controllers
             }
         }
 
+        /// <summary>
+        /// Elimina un libro a partir de su identificador
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns><see cref="OkResult"/> si fue eliminado, <see cref="NotFoundResult"/> si no fue encontrado</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
@@ -68,6 +87,12 @@ namespace WebAPI.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Edita un libro a partir de su identificador
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="bookDto"></param>
+        /// <returns><see cref="OkResult"/> si fue editado exitosamente, de lo contrario <see cref="BadRequestResult"/> con el error</returns>
         [HttpPut("{id}")]
         public async Task<ActionResult> Update(int id, [FromBody] WithoutIdBookRequest bookDto)
         {

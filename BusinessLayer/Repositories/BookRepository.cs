@@ -13,10 +13,8 @@ namespace BusinessLayer.Repositories
     public class BookRepository : Repository<Books>, IBookRepository
     {
         private readonly DbSet<Books> _dbSet;
-        private readonly AppDbContext _appDbContext;
         public BookRepository(AppDbContext appDbContext) : base(appDbContext)
         {
-            _appDbContext = appDbContext;
             _dbSet = appDbContext.Set<Books>();
         }
 

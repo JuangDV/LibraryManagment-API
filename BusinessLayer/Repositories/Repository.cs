@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,20 +43,25 @@ namespace BusinessLayer.Repositories
             }
         }
 
-        public async Task<PagedRepositoryDTO<T>> GetAllAsync(int page)
+        public async Task<PagedRepositoryDTO<T>> GetAllAsync(int page, int pageDivisor)
         {
+            const int entityMaxLoad = 10; // MAXIMO DE ENTIDADES QUE PUEDEN CARGARSE POR PAGINA
             var entityPage = new PagedRepositoryDTO<T>();
-            // calcular la cantidad de paginas dividiendo por 3 la cantidad de entidades
             int entitiesCount = await _dbSet.CountAsync();
-            if(entitiesCount > 0)
+            if (pageDivisor > entityMaxLoad)
             {
-                decimal totalPages = Math.Ceiling((decimal)(entitiesCount / 3.00));
+                throw new ArgumentOutOfRangeException(nameof(pageDivisor), $"Solo puede cargarse un maximo de {entityMaxLoad} registros por pagina");
+            }
+            else if (entitiesCount > 0)
+            {
+                decimal totalPages = (decimal)Math.Ceiling(entitiesCount / (float)pageDivisor);
 
                 if (page < 1 || totalPages < page) page = (int)totalPages; // devolver la ultima pagina
 
-                var entitiesList = await _dbSet.Skip((page - 1) * 3).Take(3).ToListAsync(); // Obtener solo las entidades de una pagina
+                var entitiesList = await _dbSet.Skip((page - 1) * pageDivisor).Take(pageDivisor).ToListAsync(); // Obtener solo las entidades de una pagina
                 entityPage = new PagedRepositoryDTO<T>(page, entitiesList); // Devolver un DTO con las entidades y la pagina correcta
-            } else
+            }
+            else
             {
                 entityPage = new PagedRepositoryDTO<T>(-1, new List<T>());
             }

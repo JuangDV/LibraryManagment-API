@@ -16,11 +16,11 @@ namespace ApplicationLayer.Interfaces
     {
 
         /// <summary>
-        /// Obtiene un maximo de 3 entidades en la base de datos de la pagina indicada
+        /// Obtiene un maximo de entidades indicada en la base de datos de la pagina indicada
         /// </summary>
         /// <param name="page"></param>
         /// <returns>Pagina y Lista de Entidades</returns>
-        public Task<PagedRepositoryDTO<T>> GetAllAsync(int page);
+        public Task<PagedRepositoryDTO<T>> GetAllAsync(int page, int pageDivisor);
 
         /// <summary>
         /// Obtiene una entidad especifica por su identificador en la base de datos
