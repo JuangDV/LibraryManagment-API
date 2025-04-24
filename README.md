@@ -1,4 +1,4 @@
-# Proposito del proyecto
+## Proposito del proyecto
 El objetivo de este proyecto es desarrollar una API RESTful para la gestión de una biblioteca de libros. Esta API permite:
 
 -	📖 Consultar datos importantes acerca de los libros.
@@ -14,21 +14,21 @@ El objetivo de este proyecto es desarrollar una API RESTful para la gestión de 
 Este proyecto facilita la administración eficiente de un catalogo de libros, brindando información suficiente para su gestión y dando bases solidas para
 la integración del FRONTEND dentro de un mismo sistema.
 
-# Tecnologias Utilizadas:
+## Tecnologias Utilizadas:
 	- .NET Core 8.0
 	- ASP.NET Core Web API
 	- Entity Framework Core
 	- Microsoft SQL Server
 	- Swagger
 
-# Librerias:
+## Librerias:
 	- EntityFrameworkCore 9.0.4
 	- EntityFrameworkCore.SqlServer 9.0.4
 	- EntityFrameworkCore.Tools 9.0.4
 	- Swashbuckle.AspNetCore 6.8.1
 
 
-### Instrucciones de instalación y configuración
+## Instrucciones de instalación y configuración
 1. Clona el repositorio de github.
 2. Utiliza `dotnet restore` para obtener las dependencias del proyecto.
 2. Configura la cadena de conexión en `appsettings.Development.json` que esta dentro de `WebAPI`.
@@ -49,7 +49,7 @@ la integración del FRONTEND dentro de un mismo sistema.
 __**TIP: la carpeta `Scripts-SQL/` guarda un script `onlydata_librarydb.sql` con registros predefinidos para tests.**__
 
 
-### Estructura del proyecto
+## Estructura del proyecto
 **ApplicationLayer:** (Estructura)
 - `DTOs/` Carpeta para los Data Transfer Objects.
 - `Interfaces/` Carpeta para las interfaces de los servicios/repositorios.
@@ -65,17 +65,25 @@ __**TIP: la carpeta `Scripts-SQL/` guarda un script `onlydata_librarydb.sql` con
 **WebAPI**
 - `Controllers` Contiene los controladores para la manipulación de endpoints de cada modelo.
 
-### Endpoints Principales
+## Endpoints Principales
 
-**Metodo:** `GET`
-**URL:** `/api/books`
-**Funcion:** Obtiene una lista paginada con un maximo de 3 libros de la biblioteca.
-**Ejemplo:** `/api/Books?page=1`
+**Metodo:** `GET`  
 
-**Metodo:** `POST`
-**URL:** `/api/books`
-**Funcion:** Crea un nuevo libro y lo agrega al inventario.
-**Ejemplo:** `/api/Books`
+**URL:** `/api/books`  
+
+**Funcion:** Obtiene una lista paginada con un maximo de 3 libros de la biblioteca.  
+
+**Ejemplo:** `/api/Books?page=1`  
+
+
+**Metodo:** `POST`  
+
+**URL:** `/api/books`  
+
+**Funcion:** Crea un nuevo libro y lo agrega al inventario.  
+
+**Ejemplo:** `/api/Books`  
+
 **Request Body:**
 ```json
 {
@@ -88,19 +96,30 @@ __**TIP: la carpeta `Scripts-SQL/` guarda un script `onlydata_librarydb.sql` con
 }
 ```
 
-**Metodo:** `GET`
-**URL:** `/api/Books/{id}`
-**Funcion:** Obtiene los datos del libro con un identificador especifico si existe.
-**Ejemplo:** `/api/Books/1`
+**Metodo:** `GET`  
 
-**Metodo:** `DELETE`
-**URL:** `/api/Books/{id}`
-**Funcion:** Elimina los datos del libro con un identificador especifico si existe.
-**Ejemplo:** `/api/Books/1`
+**URL:** `/api/Books/{id}`  
 
-**Metodo:** `PUT`
-**URL:** `/api/Books/{id}`
-**Funcion:** Actualiza los datos de un libro con un identificador especifico si existe.
+**Funcion:** Obtiene los datos del libro con un identificador especifico si existe.  
+
+**Ejemplo:** `/api/Books/1`  
+
+
+**Metodo:** `DELETE`  
+
+**URL:** `/api/Books/{id}`  
+
+**Funcion:** Elimina los datos del libro con un identificador especifico si existe.  
+
+**Ejemplo:** `/api/Books/1`  
+
+
+**Metodo:** `PUT`  
+
+**URL:** `/api/Books/{id}`  
+
+**Funcion:** Actualiza los datos de un libro con un identificador especifico si existe.  
+
 **Request Body:**
 **ID:** `1`
 ```json
@@ -116,7 +135,7 @@ __**TIP: la carpeta `Scripts-SQL/` guarda un script `onlydata_librarydb.sql` con
 ```
 
 
-### Decisiones de Diseño
+## Decisiones de Diseño
 
 - La aplicación de la división del proyecto en capas es para mantener la logica de negocio, el acceso a la base de datos y la definición de metodos, separada y ordenada.
 - Utilice un repositorio generico `/Repository.cs` para la creación de operaciones basicas CRUD, haciendo el codigo reutilizable y el sistema de facil escalabilidad.
