@@ -74,7 +74,7 @@ __**TIP: la carpeta `Scripts-SQL/` guarda un script `onlydata_librarydb.sql` con
 **Funcion:** Obtiene una lista paginada con un maximo de 3 libros de la biblioteca.  
 
 **Ejemplo:** `/api/Books?page=1`  
-
+___
 
 **Metodo:** `POST`  
 
@@ -96,6 +96,9 @@ __**TIP: la carpeta `Scripts-SQL/` guarda un script `onlydata_librarydb.sql` con
 }
 ```
 
+___
+
+
 **Metodo:** `GET`  
 
 **URL:** `/api/Books/{id}`  
@@ -103,6 +106,7 @@ __**TIP: la carpeta `Scripts-SQL/` guarda un script `onlydata_librarydb.sql` con
 **Funcion:** Obtiene los datos del libro con un identificador especifico si existe.  
 
 **Ejemplo:** `/api/Books/1`  
+___
 
 
 **Metodo:** `DELETE`  
@@ -112,6 +116,7 @@ __**TIP: la carpeta `Scripts-SQL/` guarda un script `onlydata_librarydb.sql` con
 **Funcion:** Elimina los datos del libro con un identificador especifico si existe.  
 
 **Ejemplo:** `/api/Books/1`  
+___
 
 
 **Metodo:** `PUT`  
@@ -124,7 +129,6 @@ __**TIP: la carpeta `Scripts-SQL/` guarda un script `onlydata_librarydb.sql` con
 **ID:** `1`
 ```json
 {
-      "id": 1,
       "title": "Le Petit Prince",
       "author": "Antoine de Saint-Exupery",
       "yearPublication": 1943,
